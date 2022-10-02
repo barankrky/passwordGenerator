@@ -1,5 +1,5 @@
 from PyQt5.QtWidgets import QApplication, QMainWindow
-import ui_main, sys, random, string
+import ui_main, sys, random, string, pyperclip
 
 class MainWindow(QMainWindow):
     def __init__(self):
@@ -7,6 +7,7 @@ class MainWindow(QMainWindow):
         self.main = ui_main.Ui_Form()
         self.main.setupUi(self)
         self.main.generateButton.clicked.connect(lambda: self.generate_password())
+        self.generate_password()
         
         
     def generate_password(self):
@@ -19,6 +20,11 @@ class MainWindow(QMainWindow):
         temp = random.sample(all, length)
         password = "".join(temp)
         self.main.passOutput.setText(password)
+        self.main.passOutput.selectAll()
+        pyperclip.copy(password)
+
+        
+        
         
         
     
